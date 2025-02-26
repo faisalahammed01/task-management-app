@@ -17,7 +17,7 @@ const UpdateTask = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/task/${id}`)
+      fetch(`https://task-management-servre.onrender.com/task/${id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Fetched Task:", data);
@@ -51,11 +51,14 @@ const UpdateTask = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch(`http://localhost:5000/task/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task),
-      });
+      const response = await fetch(
+        `https://task-management-servre.onrender.com/task/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(task),
+        }
+      );
 
       const responseData = await response.json();
       console.log("Update Response:", responseData);

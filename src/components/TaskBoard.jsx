@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://task-management-servre.onrender.com");
 
 export default function TaskBoard() {
   const [tasks, setTasks] = useState([]);
@@ -13,7 +13,9 @@ export default function TaskBoard() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await fetch("http://localhost:5000/task");
+        const res = await fetch(
+          "https://task-management-servre.onrender.com/task"
+        );
         const data = await res.json();
         setTasks(data);
       } catch {
@@ -79,11 +81,14 @@ export default function TaskBoard() {
     });
 
     try {
-      await fetch(`http://localhost:5000/task/${result.draggableId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category: destination.droppableId }),
-      });
+      await fetch(
+        `https://task-management-servre.onrender.com/task/${result.draggableId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ category: destination.droppableId }),
+        }
+      );
 
       socket.emit("updateTask", {
         _id: result.draggableId,
@@ -96,7 +101,9 @@ export default function TaskBoard() {
 
   const deleteTask = async (id) => {
     try {
-      await fetch(`http://localhost:5000/task/${id}`, { method: "DELETE" });
+      await fetch(`https://task-management-servre.onrender.com/task/${id}`, {
+        method: "DELETE",
+      });
       setTasks(tasks.filter((task) => task._id !== id));
 
       socket.emit("deleteTask", id);

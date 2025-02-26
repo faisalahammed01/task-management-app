@@ -39,13 +39,16 @@ export default function AddTaskModal() {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/task", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTask),
-      });
+      const response = await fetch(
+        "https://task-management-servre.onrender.com/task",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTask),
+        }
+      );
 
       const data = await response.json();
 
