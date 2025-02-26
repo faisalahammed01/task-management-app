@@ -1,3 +1,17 @@
+/* index.css বা tailwind.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tailwind ডার্ক মোড কাস্টমাইজেশন */
+@layer base {
+  body {
+    background-color: theme("colors.lightBg");
+    color: theme("colors.lightText");
+  }
+
+  .dark body {
+    background-color: theme("colors.darkBg");
+    color: theme("colors.darkText");
+  }
+}
